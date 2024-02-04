@@ -34,6 +34,19 @@ TEST(TRIDIAGONAL, TEST_2) {
 }
 
 
+TEST(TRIDIAGONAL, TEST_3) {
+    std::vector<double> vect1{1,1};
+    std::vector<double> vect2{1,1,1};
+    std::vector<double> vect3{1,1};
+    std::vector<double> d{1,2, 3};
+    TridiagonalMatrix matrix(vect1, vect2, vect3);
+    std::vector<double> x = solve_tridiagonal_matrix(matrix, d);
+    EXPECT_NEAR(x[0], -1.0, 1e-12);
+    EXPECT_NEAR(x[1], 2.0, 1e-12);
+    EXPECT_NEAR(x[2], 1.0, 1e-12);
+}
+ 
+
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
