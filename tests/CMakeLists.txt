@@ -1,0 +1,7 @@
+find_package(GTest REQUIRED)
+
+include_directories(${GTEST_INCLUDE_DIRS})
+
+add_executable(TridiagonalMatrixSolverTest TridiagonalMatrixSolverTest.cpp)
+target_link_libraries(TridiagonalMatrixSolverTest  TridiagonalMatrixSolver  gtest gtest_main) 
+add_test(NAME TridiagonalMatrixSolverTest COMMAND TridiagonalMatrixSolverTest.cpp)

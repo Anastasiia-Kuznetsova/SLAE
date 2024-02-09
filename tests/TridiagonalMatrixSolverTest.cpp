@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "TridiagonalMatrixSolver.h"
+#include "TridiagonalMatrixSolver/TridiagonalMatrixSolver.h"
 
 
 TEST(TRIDIAGONAL, TEST_1) {
@@ -46,8 +46,3 @@ TEST(TRIDIAGONAL, TEST_3) {
     EXPECT_NEAR(x[2], 1.0, 1e-12);
 }
  
-
-int main(int argc, char **argv) {
-    testing::InitGoogleTest(&argc, argv);
-    return RUN_ALL_TESTS();
-}
