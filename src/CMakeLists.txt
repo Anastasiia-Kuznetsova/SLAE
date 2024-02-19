@@ -1,11 +1,4 @@
-set(HEADERS
-    TridiagonalMatrixSolver/TridiagonalMatrixSolver.h
-)
-
-set(SOURCES
-    TridiagonalMatrixSolver/TridiagonalMatrixSolver.cpp
-)
-
-add_library(TridiagonalMatrixSolver ${HEADERS} ${SOURCES})
-
-target_include_directories(TridiagonalMatrixSolver PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+file(GLOB_RECURSE SOURCES *.hpp *.cpp)
+add_library(${PROJECT_NAME} INTERFACE ${SOURCES})
+target_include_directories(${PROJECT_NAME} INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
+target_compile_features(${PROJECT_NAME} INTERFACE cxx_std_20)
