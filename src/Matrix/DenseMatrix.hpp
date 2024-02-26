@@ -16,12 +16,16 @@ public:
             matrix_.insert(matrix_.end(), data[i].begin(), data[i].end());
           }
     }
+    DenseMatrix(const DenseMatrix& matrix): matrix_(matrix.get_values()), height_(matrix.get_height()), width_(matrix.get_width()) {}
+    DenseMatrix(const T value, const std::size_t height, const std::size_t width):
+          matrix_(std::vector(height * width * value)), height_(height), width_(width){}
 
     size_t get_width() const  {return width_;}
     size_t get_height() const {return height_;}
-    const std::vector<T>& get_values() const {return matrix_;}
+    const std::vector<T> get_values() const {return matrix_;}
 
-    std::vector<T> operator*(std::vector<T> &vector) {
+
+    std::vector<T> operator*(const std::vector<T> &vector) {
         std::vector<T> result(height_, 0);
         for (std::size_t i = 0; i < height_; i++) {
             for (std::size_t j = 0; j < width_; j++) {
@@ -41,8 +45,44 @@ public:
         return ans;
     }
 
+    void operator=(DenseMatrix<T> a){
+        matrix_ = a.get_values();
+        width_ = a.get_width();
+        height_ = a.get_height();
+    }
+
+    template<typename U>
+    DenseMatrix<T> operator*(const DenseMatrix<U>& other) {
+        std::vector<T> res_matrix;
+        for (std::size_t i = 0; i < height_; i++) {
+            for (std::size_t k = 0; k < width_; k++) {
+                for (std::size_t j = 0; j < other.get_height(); ++j) {
+                    res_matrix.push_back(matrix_[i * width_ + k] * other(k, j));
+                }
+            }
+        }
+        DenseMatrix ans(res_matrix, height_, other.get_width());
+        return ans;
+    } 
+
+
     T operator()(long unsigned int i,  long unsigned int j) const{
         return(matrix_[i * width_ + j]);
+    }
+
+    DenseMatrix<T> transpose(){
+        double tmp;
+        std::vector matrix = matrix_;
+        for(std::size_t i = 0; i < height_; i ++) {
+            for(std::size_t j = i; j < width_; j ++){
+                tmp = matrix[i * width_ + j];
+                matrix[i * width_ + j] =  matrix[j * width_ + i];
+                matrix[j * width_ + i] = tmp;
+            }
+        }
+        DenseMatrix ans(matrix, width_, height_);
+        return ans; 
+
     }
     
 };
