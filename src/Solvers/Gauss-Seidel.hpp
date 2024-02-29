@@ -4,12 +4,10 @@ template<typename T>
 std::vector<double> gauss_seidel( CSR<T>& matrix, const std::vector<T>& b,const std::vector<T>& x_s, long double break_condition){
     double tmp = 0;
     double r_cur = 1e8;
-    double r_prev = 0;
     std::vector<double> res(x_s.size()); 
     std::vector<double> x_0(x_s.size()) ;
     std::copy(x_s.begin(), x_s.end(), x_0.begin());
-    for(; std::abs(r_cur - r_prev) > break_condition;){
-        r_prev = r_cur;
+    for(; r_cur > break_condition;){
         for(std::size_t j = 0; j < x_0.size(); j++){
             tmp = 0;
             for(std::size_t k = matrix.get_rows()[j]; k < matrix.get_rows()[j+1]; k++){

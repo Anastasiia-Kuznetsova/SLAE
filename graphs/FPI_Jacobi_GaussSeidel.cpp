@@ -12,13 +12,11 @@ std::vector<double> gauss_seidel( CSR<T>& matrix, const std::vector<T>& b, const
     file.open ("Gauss_Seidel.csv");
     double tmp = 0;
     double r_cur = 1e8;
-    double r_prev = 0;
     int k = 1;
     std::vector<double> res(x_s.size()); 
     std::vector<double> x_0(x_s.size()) ;
     std::copy(x_s.begin(), x_s.end(), x_0.begin());
-    for(; std::abs(r_cur - r_prev) > break_condition;){
-        r_prev = r_cur;
+    for(; r_cur > break_condition;){
         for(std::size_t j = 0; j < x_0.size(); j++){
             tmp = 0;
             for(std::size_t k = matrix.get_rows()[j]; k < matrix.get_rows()[j+1]; k++){
@@ -47,13 +45,11 @@ std::vector<double> jacobi( CSR<T>& matrix, const std::vector<T>& b, const std::
     std::vector<double> x(x_s.size());
     double tmp = 0;
     double r_cur = 1e8;
-    double r_prev = 0;
     int k = 1;
     std::vector<double> res(x_s.size());
     std::vector<double> x_0(x_s.size()) ;
     std::copy(x_s.begin(), x_s.end(), x_0.begin()); 
-    for(; std::abs(r_cur - r_prev) > break_condition;){
-        r_prev = r_cur;
+    for(; r_cur  > break_condition;){
         for(std::size_t j = 0; j < x_0.size(); j++){
             tmp = 0;
             for(std::size_t k = matrix.get_rows()[j]; k < matrix.get_rows()[j+1]; k++){
@@ -80,12 +76,11 @@ std::vector<double> FPI(CSR<T>& matrix, const std::vector<T>& b,  const std::vec
     file.open ("FPI.csv");
     std::vector<double> x(x_s.size());
     double r_cur = 1e8;
-    double r_prev = 0;
     int k = 0;
     std::vector<double> res(x_s.size()); 
     std::vector<double> x_0(x_s.size()) ;
     std::copy(x_s.begin(), x_s.end(), x_0.begin());
-    for(; std::abs(r_cur - r_prev) > break_condition;){
+    for(; r_cur > break_condition;){
         res = (matrix * x_0 - b);
         x = x_0 - tau * res;
         std::copy(x.begin(), x.end(), x_0.begin());
