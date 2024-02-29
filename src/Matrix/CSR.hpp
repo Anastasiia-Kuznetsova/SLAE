@@ -155,8 +155,8 @@ CSR<T> operator*(U a, CSR<T> matrix){
 
 template<typename T>
 std::ostream& operator<<(std::ostream& os, const CSR<T>& csr_matrix){
-    for (unsigned int i = 0; i + 1 < (csr_matrix.get_rows()).size(); i ++){
-        for (unsigned int j = 0; j <= *std::max_element(csr_matrix.get_cols().begin(), csr_matrix.get_cols().end()); j++) std::cout << csr_matrix(i, j) << ' ';
+    for (unsigned int i = 0; i  < csr_matrix.get_height(); i ++){
+        for (unsigned int j = 0; j < csr_matrix.get_width(); j++) std::cout << csr_matrix(i, j) << ' ';
     std::cout << std::endl;
     }
     return os;
