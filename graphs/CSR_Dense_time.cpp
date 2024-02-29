@@ -1,9 +1,8 @@
-#include "../src/Matrix/CSR.h"
-#include "../src/Matrix/DenseMatrix.h"
+#include "../src/Matrix/CSR.hpp"
+#include "../src/Matrix/DenseMatrix.hpp"
 #include <vector>
 #include <chrono>
 #include <iostream>
-#include <vector>
 #include <random>
 #include <fstream>
 
@@ -95,7 +94,7 @@ void get_time_CSR_zeros(){
 		for (int j = 1; j <= n; j++) {
         	rows[j] += rows[j - 1];
     	}
-		CSR<int> matrix(values, cols, rows);
+		CSR<int> matrix(values, cols, rows, i, i);
         
         file << i << ", ";
 		start = steady_clock::now();

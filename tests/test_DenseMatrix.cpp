@@ -11,9 +11,13 @@ TEST(DENSE, TEST_1) {
     int d = 3;
     std::vector<double> vect2{2 , 4, -3, 1};
     DenseMatrix a1  = matrix1 * c;
+    std::cout << a1;
     DenseMatrix a2 = d * matrix2;
+    std::cout << a2;
     DenseMatrix a3 = a1 + a2;
+    std::cout << a3;
     DenseMatrix a4 = a3 - matrix1;
+    std::cout << a4;
     std::vector<double> ans_ =  a4 * vect2;
     for (std::size_t i = 0; i < ans_.size(); i ++) {
         std::cout << ans_[i] << " ";

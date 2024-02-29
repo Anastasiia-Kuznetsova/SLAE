@@ -37,9 +37,9 @@ public:
 
     template<typename U>
     DenseMatrix<T> operator*(U a){
-        std::vector<T> res;
+        std::vector<T> res(height_* width_, 0);
         for (std::size_t i = 0; i < matrix_.size(); i++) {
-            res.push_back(matrix_[i] * a);
+            res[i] = (matrix_[i] * a);
         }
         DenseMatrix<T> ans(res,height_,width_);
         return ans;
@@ -53,11 +53,11 @@ public:
 
     template<typename U>
     DenseMatrix<T> operator*(const DenseMatrix<U>& other) {
-        std::vector<T> res_matrix;
+        std::vector<T> res_matrix(height_ * other.get_width());
         for (std::size_t i = 0; i < height_; i++) {
             for (std::size_t k = 0; k < width_; k++) {
                 for (std::size_t j = 0; j < other.get_height(); ++j) {
-                    res_matrix.push_back(matrix_[i * width_ + k] * other(k, j));
+                    res_matrix[i * other.get_width() + j]=(matrix_[i * width_ + k] * other(k, j));
                 }
             }
         }
@@ -89,10 +89,10 @@ public:
 
 template <typename T>
 DenseMatrix<T> operator+(DenseMatrix<T> & left, DenseMatrix<T> & right){
-    std::vector<T> res;
+    std::vector<T> res(left.get_height() * left.get_width(), 0);
     for (std::size_t i = 0; i < left.get_height(); i ++){
         for (std::size_t j = 0; j < left.get_width(); j ++){
-                res.push_back(left(i,j) + right(i, j));
+                res[i * left.get_width() + j] = (left(i,j) + right(i, j));
         }
     }
     DenseMatrix<T> ans(res, left.get_height(), left.get_width());
@@ -101,10 +101,10 @@ DenseMatrix<T> operator+(DenseMatrix<T> & left, DenseMatrix<T> & right){
 
 template <typename T>
 DenseMatrix<T> operator-(DenseMatrix<T> & left, DenseMatrix<T> & right){
-    std::vector<T> res;
+    std::vector<T> res(left.get_height() * left.get_width(), 0);
     for (std::size_t i = 0; i < left.get_height(); i ++){
         for (std::size_t j = 0; j < left.get_width(); j ++){
-                res.push_back(left(i,j) - right(i, j));
+                res[i * left.get_width() + j] = (left(i,j) - right(i, j));
         }
     }
     DenseMatrix<T> ans(res, left.get_height(), left.get_width());

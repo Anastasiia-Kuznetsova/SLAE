@@ -19,7 +19,7 @@ std::pair<DenseMatrix<double>, DenseMatrix<double>> householder(const DenseMatri
         v_i = x_i;
         v_i[0] = (std::abs(x_i[0]) > 1e-10) ? v_i[0] + x_i[0] / abs(x_i[0]) * std::sqrt(dot(x_i, x_i)) : v_i[0] + std::sqrt(dot(x_i, x_i));
   
-        if (std::sqrt(dot(x_i, x_i)) < 1e-10) break;
+        if (std::sqrt(dot(x_i, x_i)) < 1e-10) continue;
         for(std::size_t j = i; j < width; j ++ ){
             a = 0.0;
             for(std::size_t k = i; k < height; k ++) a += R[k * width + j] * v_i[k - i];
