@@ -1,7 +1,7 @@
-#include "../Matrix/CSR.hpp"
+#include "Matrix/CSR.hpp"
 #include <cmath>
 #include <iostream>
-
+#include <numbers>
 
 template<typename T>
 double calc_lambda_max(CSR<T>& matrix, double break_condition){
@@ -33,10 +33,10 @@ std::vector<size_t> roots_order(int r){
 std::vector<double> calc_roots(int r, double lambda_min, double lambda_max){
     size_t n = static_cast<size_t>(std::pow(2, r));
     std::vector<double> roots(n);
-    const double cos_n = std::cos(3.141592653589793238462643383279 / static_cast<int>(n));
-    const double sin_n = std::sin(3.141592653589793238462643383279 / static_cast<int>(n));
-    const double cos_2n = std::cos(3.141592653589793238462643383279 / (2 * static_cast<int>(n)));
-    double sin_i = std::sin(3.141592653589793238462643383279 / (2 * static_cast<int>(n)));
+    const double cos_n = std::cos(std::numbers::pi / static_cast<int>(n));
+    const double sin_n = std::sin(std::numbers::pi/ static_cast<int>(n));
+    const double cos_2n = std::cos(std::numbers::pi / (2 * static_cast<int>(n)));
+    double sin_i = std::sin(std::numbers::pi/ (2 * static_cast<int>(n)));
     roots[0] = cos_2n;
     for(size_t i = 1; i < n / 2 + 1; i ++){
         roots[i] = roots[i - 1] * cos_n - sin_i * sin_n;

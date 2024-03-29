@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "../src/Matrix/CSR.hpp"
+#include "Matrix/CSR.hpp"
 
 
 TEST(DENSE, TEST_1) {
@@ -15,9 +15,6 @@ TEST(DENSE, TEST_1) {
     CSR a3 = a1 + a2;
     CSR a4 = a3 - matrix1;
     std::vector<double> ans_ =  a4 * vect2;
-    for (std::size_t i = 0; i < ans_.size(); i ++) {
-        std::cout << ans_[i] << " ";
-    }
     std::vector<double> ans{-10,1,18};
     ASSERT_EQ(ans_, ans);
 }

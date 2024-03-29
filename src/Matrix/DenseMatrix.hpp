@@ -70,7 +70,7 @@ public:
         return(matrix_[i * width_ + j]);
     }
 
-    DenseMatrix<T> transpose(){
+    DenseMatrix<T> transpose() const{
         double tmp;
         std::vector matrix = matrix_;
         for(std::size_t i = 0; i < height_; i ++) {
@@ -85,7 +85,10 @@ public:
 
     }
     
+    
 };
+
+
 
 template <typename T>
 DenseMatrix<T> operator+(DenseMatrix<T> & left, DenseMatrix<T> & right){

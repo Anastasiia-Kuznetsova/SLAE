@@ -1,4 +1,4 @@
-#include"../Matrix/DenseMatrix.hpp"
+#include"Matrix/DenseMatrix.hpp"
 #include<iostream>
 #include <cmath>
 
@@ -14,8 +14,7 @@ std::pair<DenseMatrix<double>, DenseMatrix<double>> householder(const DenseMatri
     double a = 0;
     for(std::size_t i = 0; i < width; i++){
         std::vector<T> x_i(height);
-        for(std::size_t j = 0; j < height; j++) x_i[j] = R[j * width + i];
-        x_i.erase(x_i.begin(), x_i.begin() + static_cast<int>(i));
+        for(std::size_t j = i; j < height; j++) x_i[j - i] = R[j * width + i];
         v_i = x_i;
         v_i[0] = (std::abs(x_i[0]) > 1e-10) ? v_i[0] + x_i[0] / abs(x_i[0]) * std::sqrt(dot(x_i, x_i)) : v_i[0] + std::sqrt(dot(x_i, x_i));
   
@@ -31,6 +30,7 @@ std::pair<DenseMatrix<double>, DenseMatrix<double>> householder(const DenseMatri
             for(std::size_t k = i; k < height; k ++) a += Q[k * width + j] * v_i[k - i];
             for(std::size_t k = i; k < height; k ++) Q[k * width + j] -= 2.0 / (dot(v_i, v_i)) * a * v_i[k - i];
         }
+        x_i.pop_back();
     }
     double tmp;
     for(std::size_t i = 0; i < height; i ++) {

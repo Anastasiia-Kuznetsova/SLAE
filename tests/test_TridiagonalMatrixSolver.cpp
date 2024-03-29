@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "../src/Solvers/TridiagonalMatrixSolver.hpp"
+#include "Solvers/TridiagonalMatrixSolver.hpp"
 
 
 TEST(TRIDIAGONAL, TEST_1) {

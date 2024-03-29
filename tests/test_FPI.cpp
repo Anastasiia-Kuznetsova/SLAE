@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "../src/Solvers/FPI.hpp"
+#include "Solvers/FPI.hpp"
 
 
 

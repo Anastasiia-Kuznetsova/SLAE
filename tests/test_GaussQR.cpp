@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "../src/Solvers/GaussQR.hpp"
+#include "Solvers/GaussQR.hpp"
 
 
 TEST(GAUSS_QR, TEST_1) {

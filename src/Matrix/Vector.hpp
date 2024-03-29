@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <gtest/gtest.h>
+#include <cmath>
 
 
 template<typename T>
@@ -45,6 +46,13 @@ T dot(const std::vector<T> rhs, const std::vector<T>& lhs){
     T res = 0;
     for(size_t i = 0; i < rhs.size(); i++) res += (rhs[i] * lhs[i]);
     return res;
+}
+
+template<typename T>
+double norm(const std::vector<T> rhs){
+    double res = 0;
+    for(size_t i = 0; i < rhs.size(); i++) res += (rhs[i] * rhs[i]);
+    return std::sqrt(res);
 }
 
 template<typename T>

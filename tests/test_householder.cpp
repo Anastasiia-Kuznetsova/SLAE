@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
-#include "../src/Decomposition/Householder.hpp"
-#include "../src/Matrix/DenseMatrix.hpp"
+#include "Decomposition/Householder.hpp"
+#include "Matrix/DenseMatrix.hpp"
 
 TEST(HOUSEHOLDER, TEST_1) {
     std::vector<std::vector<double>> a{{1, 2, 3}, {4, 5, 6}, {7, 8,9}};

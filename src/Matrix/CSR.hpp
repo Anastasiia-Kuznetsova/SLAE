@@ -50,8 +50,11 @@ public:
     }
 
     const std::vector<long unsigned int>& get_cols() const {return cols_;}
+    long unsigned int get_cols(long unsigned int i) const {return cols_[i];}
     const std::vector<long unsigned int>& get_rows() const {return rows_;}
+    long unsigned int get_rows(long unsigned int i) const {return rows_[i];}
     const std::vector<T>& get_values() const {return values_;}
+    T  get_values(long unsigned int i) const {return values_[i];}
 
 
     size_t get_width() const  {return width_;}
@@ -155,8 +158,8 @@ CSR<T> operator*(U a, CSR<T> matrix){
 
 template<typename T>
 std::ostream& operator<<(std::ostream& os, const CSR<T>& csr_matrix){
-    for (unsigned int i = 0; i  < csr_matrix.get_height(); i ++){
-        for (unsigned int j = 0; j < csr_matrix.get_width(); j++) std::cout << csr_matrix(i, j) << ' ';
+    for (unsigned int i = 0; i < (csr_matrix.get_height()); i ++){
+        for (unsigned int j = 0; j <= *std::max_element(csr_matrix.get_cols().begin(), csr_matrix.get_cols().end()); j++) std::cout << csr_matrix(i, j) << ' ';
     std::cout << std::endl;
     }
     return os;
