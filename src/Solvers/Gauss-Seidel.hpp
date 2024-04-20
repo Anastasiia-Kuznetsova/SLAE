@@ -77,6 +77,7 @@ std::vector<double> fast_gauss_seidel( CSR<T>& matrix, const std::vector<T>& b, 
 
     std::vector<T> y(y_0.size());
     for(; r_cur > break_condition;){
+        y_1 = gauss_seidel_iter(matrix, b, y_1);
         y = 2 * mu_1 / rho * y_1 - mu_0 * y_0;
         mu_0 = 2 / rho * mu_1 - mu_0;
         y /= mu_0;
@@ -89,7 +90,6 @@ std::vector<double> fast_gauss_seidel( CSR<T>& matrix, const std::vector<T>& b, 
 
         res = (matrix * y) - b;
         r_cur = std::sqrt(dot(res, res));
-        std::cout << r_cur << std::endl;
 
     }
 
