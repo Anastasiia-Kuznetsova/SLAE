@@ -18,12 +18,25 @@ public:
     }
     DenseMatrix(const DenseMatrix& matrix): matrix_(matrix.get_values()), height_(matrix.get_height()), width_(matrix.get_width()) {}
     DenseMatrix(const T value, const std::size_t height, const std::size_t width):
-          matrix_(std::vector(height * width * value)), height_(height), width_(width){}
+          matrix_(std::vector(height * width, value)), height_(height), width_(width){}
 
     size_t get_width() const  {return width_;}
     size_t get_height() const {return height_;}
     const std::vector<T> get_values() const {return matrix_;}
 
+    std::vector<T> get_col(std::size_t i){
+        std::vector<double> ans(height_);
+        for(std::size_t j = 0; j < height_;j++){
+            ans[j] = matrix_[width_ * j + i];
+        }
+        return ans;
+    }
+
+    void write_col(const std::vector<T>& vector, std::size_t i){
+        for(std::size_t j = 0; j < height_;j++){
+            matrix_[width_ * j + i] = vector[j];
+        }
+    }
 
     std::vector<T> operator*(const std::vector<T> &vector) {
         std::vector<T> result(height_, 0);
@@ -67,6 +80,10 @@ public:
 
 
     T operator()(long unsigned int i,  long unsigned int j) const{
+        return(matrix_[i * width_ + j]);
+    }
+
+    T& change_elem(long unsigned int i,  long unsigned int j){
         return(matrix_[i * width_ + j]);
     }
 

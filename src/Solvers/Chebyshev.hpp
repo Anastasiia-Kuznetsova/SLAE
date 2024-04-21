@@ -5,6 +5,7 @@
 
 template<typename T>
 double calc_lambda_max(CSR<T>& matrix, double break_condition){
+    std::cout << "i'm there CALC LM";
     double mu_cur = 0;
     double mu_prev = 1;
     std::vector<double> r(matrix.get_width(), 1);

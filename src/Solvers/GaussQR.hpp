@@ -19,6 +19,5 @@ std::vector<double> gauss_qr(const DenseMatrix<T>& A, const std::vector<T>& b){
             tmp += R(0, j) * x[j];
         }
     x[0] = (y[0] - tmp) / R(0,0);
-    std::cout << x;
     return x;
 }
